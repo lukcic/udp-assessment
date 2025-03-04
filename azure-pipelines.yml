@@ -1,0 +1,38 @@
+trigger: none
+
+parameters:
+  - name: subject_area
+    displayName: Subject area
+    type: string
+    values:
+      - "01"
+      - "02"
+      - "03"
+  - name: environment
+    displayName: environment
+    type: string
+    values:
+      - "dev"
+      - "qa"
+      - "prod"
+
+jobs:
+  - job: terraform
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: "1.10.5"
+      - script: |
+          terraform init
+        workingDirectory: "${{ parameters.subject_area}}/{{ parameters.environment }}"
+      - script: |
+          terraform fmt
+        workingDirectory: "${{ parameters.subject_area}}/{{ parameters.environment }}"
+      - script: |
+          terraform plan -out=tf.plan
+        workingDirectory: "${{ parameters.subject_area}}/{{ parameters.environment }}"
+      - script: |
+          terraform apply tf.plan
+        workingDirectory: "${{ parameters.subject_area}}/{{ parameters.environment }}"
