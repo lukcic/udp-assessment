@@ -19,9 +19,9 @@ parameters:
 jobs:
   - job: terraform
     pool:
-      vmImage: "ubuntu-latest"
+      vmImage: "az-devops-runner"
     steps:
-      - task: TerraformInstaller@1
+      - task: TerraformInstaller@1 # Task must be installed from Marketplace
         inputs:
           terraformVersion: "1.10.5"
       - script: |
