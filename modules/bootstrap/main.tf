@@ -33,3 +33,7 @@ resource "azurerm_role_assignment" "role_assign" {
   principal_id         = azuread_group.ad_group[each.key].object_id
   role_definition_name = each.value
 }
+
+output "resource_group_name" {
+  value = azurerm_resource_group.empty_rg.name
+}
