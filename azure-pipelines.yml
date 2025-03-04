@@ -18,8 +18,7 @@ parameters:
 
 jobs:
   - job: terraform
-    pool:
-      vmImage: "az-devops-runner"
+    pool: "Default"
     steps:
       - task: TerraformInstaller@1 # Task must be installed from Marketplace
         inputs:
