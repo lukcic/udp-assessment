@@ -22,7 +22,7 @@ jobs:
     steps:
       - task: AzureCLI@2
         inputs:
-          azureSubscription: $ARM_SUBSCRIPTION_ID
+          azureSubscription: $(ARM_SUBSCRIPTION_ID)
           ScriptType: "bash"
           scriptLocation: "inlineScript"
           inlineScript: |
