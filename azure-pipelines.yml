@@ -1,5 +1,8 @@
 trigger: none
 
+variables:
+  - group: "udp-assessment"
+
 parameters:
   - name: subject_area
     displayName: Subject area
