@@ -39,7 +39,7 @@ jobs:
           terraform fmt
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
-          terraform plan -out=tf.plan
+          echo $TF_VAR_subscription_id && terraform plan -out=tf.plan
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
           terraform apply tf.plan && terraform destroy --auto-approve
