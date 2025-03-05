@@ -10,15 +10,26 @@
 To access Azure by Terraform we should use:
 
 - `Azure CLI` when running TF locally
+
+    AZ login:
+
+    ```sh
+    az login --use-device-code
+    az account show
+    ```
+
 - `Service Principal` or `Managed Identity` when running TF by CI server
   - permissions to register resource providers
 
+  Service Principal creation:
+
+  ```sh
+    az ad sp create-for-rbac --name="terraform-service-principal" --role="Contributor" --scopes="/subscriptions/<SUBSCRIPTION_ID>"
+  ```
+
 ### Azure CLI
 
-```sh
-az login --use-device-code
-az account show
-```
+
 
 ## Variables
 

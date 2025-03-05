@@ -20,11 +20,23 @@ jobs:
   - job: terraform
     pool: "Default"
     steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: $ARM_SUBSCRIPTION_ID
+          ScriptType: "bash"
+          scriptLocation: "inlineScript"
+          inlineScript: |
+            az login --service-principal -u $SERVICE_PRINCIPAL_ID -p $SERVICE_PRINCIPAL_SECRET --tenant $TENANT_ID
       - task: TerraformInstaller@1 # Task must be installed from Marketplace
         inputs:
           terraformVersion: "1.10.5"
       - script: |
           terraform init
+        env:
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
           terraform fmt
@@ -33,5 +45,5 @@ jobs:
           terraform plan -out=tf.plan
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
-          terraform apply tf.plan
+          terraform apply tf.plan && terraform destroy --auto-approve
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
