@@ -32,18 +32,3 @@ variable "subscription_id" {
   description = "ID of subscription used"
   default     = null
 }
-
-variable "client_id" {
-  type        = string
-  description = "appId value from az ad sp create-for-rbac"
-}
-
-variable "client_secret" {
-  type        = string
-  description = "password value from az ad sp create-for-rbac"
-}
-
-variable "tenant_id" {
-  type        = string
-  description = "tenant value from az ad sp create-for-rbac"
-}
