@@ -1,4 +1,4 @@
-variable "subscription_id" {
+variable "SUBSCRIPTION_ID" {
   type    = string
   default = null
 }
@@ -10,5 +10,5 @@ module "bootstrap" {
   subject_area    = "01"
   environment     = basename(abspath(path.cwd)) # "dev"
   location        = "West Europe"
-  subscription_id = var.subscription_id
+  subscription_id = var.SUBSCRIPTION_ID
 }

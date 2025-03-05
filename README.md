@@ -36,5 +36,5 @@ To access Azure by Terraform we should use:
 To deploy project with only one valid subscription ID:
 
 ```sh
-export TF_VAR_subscription_id="a5551..."
+export TF_VAR_SUBSCRIPTION_ID="a5551..."
 ```

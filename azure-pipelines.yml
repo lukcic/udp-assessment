@@ -27,7 +27,7 @@ jobs:
       ARM_CLIENT_SECRET: $(SERVICE_PRINCIPAL_SECRET)
       ARM_TENANT_ID: $(TENANT_ID)
       ARM_SUBSCRIPTION_ID: $(SUBSCRIPTION_ID)
-      TF_VAR_subscription_id: $(SUBSCRIPTION_ID)
+      TF_VAR_SUBSCRIPTION_ID: $(SUBSCRIPTION_ID)
     steps:
       - task: TerraformInstaller@1 # Task must be installed from Marketplace
         inputs:
@@ -39,7 +39,7 @@ jobs:
           terraform fmt
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
-          echo $TF_VAR_subscription_id && terraform plan -out=tf.plan
+          terraform plan -out=tf.plan
         workingDirectory: "${{ parameters.subject_area}}/${{ parameters.environment }}"
       - script: |
           terraform apply tf.plan && terraform destroy --auto-approve
